@@ -47,7 +47,7 @@ export interface MainScreenLinks {
 export const getPersonolizedFolders = useMemoize(async (): Promise<PersonalizedFolder[]> => {
   try {
     const folders = await client.fetch(
-      '*[_type == "personalizedFolder"]{title, slug, _id, _type, folders[]->{title, parentFolder, slug, _id, _type, content}}',
+      '*[_type == "personalizedFolder" && title == "Yura Karikh"]{title, slug, _id, _type, folders[]->{title, parentFolder, slug, _id, _type, content}}',
     )
     return folders
   } catch (error) {

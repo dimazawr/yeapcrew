@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import Dialog from '../components/Dialog.vue'
+import DialogComponent from '../components/DialogComponent.vue'
 import { type ContentFolder } from '@/api/queries'
 import { useRoute, useRouter } from 'vue-router'
 import { useDataStore } from '@/stores/data'
@@ -24,8 +24,7 @@ folder.value = getContentFolderData(route.params.folder as string, route.params.
 </script>
 
 <template>
-  <Teleport to="#dialogs">
-    <Dialog
+    <DialogComponent
       :showModal="showModal"
       :title="folder?.title ?? 'Loading...'"
       :actionOnClose="handleDialogClose"
@@ -42,9 +41,9 @@ folder.value = getContentFolderData(route.params.folder as string, route.params.
       >
         {{ contentItem.title }}
       </FileIconBtn>
-    </Dialog>
+    </DialogComponent>
 
-    <Dialog
+    <DialogComponent
       :showModal="showPlayerModal"
       :title="currentContent?.title ?? 'Error'"
       type="player"
@@ -56,6 +55,5 @@ folder.value = getContentFolderData(route.params.folder as string, route.params.
       "
     >
       <VideoPlayer :href="currentContent.link" v-if="currentContent" />
-    </Dialog>
-  </Teleport>
+    </DialogComponent>
 </template>

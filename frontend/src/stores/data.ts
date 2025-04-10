@@ -18,7 +18,16 @@ export const useDataStore = defineStore('data', () => {
   })
 
   const setData = (newData: PersonalizedFolder[]) => {
-    data.value = newData
+    const filteredData = newData.filter((folder) => {
+      // Filter subfolders to keep only those with content
+      if (folder.folders) {
+      folder.folders = folder.folders.filter((subfolder) => Boolean(subfolder.content))
+      // Keep this folder only if it has at least one subfolder with content
+      return folder.folders.length > 0
+      }
+      return false
+    })
+    data.value = filteredData
   }
 
   const setLinks = (newLinks: MainScreenLinks) => {

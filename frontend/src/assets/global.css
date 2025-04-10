@@ -48,7 +48,7 @@
 }
 
 html {
-  background-image: url('./background.png');
+  background-image: url('./background.webp');
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;

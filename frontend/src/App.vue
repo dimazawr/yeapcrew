@@ -52,12 +52,11 @@ fetchData()
     <ul v-if="linksData" class="links">
       <li v-for="link in linksData.links" :key="link.title">
         <a :href="link.url" target="_blank" class="icon-links"
-          ><img :src="link.iconUrl" :alt="link.title" width="40" height="40" />
+          ><img :src="link.iconUrl" :alt="link.title" width="64" height="64" />
         </a>
       </li>
     </ul>
   </footer>
-  <div id="dialogs"></div>
 </template>
 
 <style scoped>
@@ -76,7 +75,7 @@ footer {
 }
 
 .links {
-  --s: 64px; /* control the size */
+  --s: 94px; /* control the size */
   display: grid;
   grid: auto-flow var(--s) / repeat(2, var(--s));
   place-items: center;
@@ -95,6 +94,7 @@ footer {
 
 .icon-links {
   background-color: #fff;
+  border-radius: 8px;
   padding: 0;
 }
 </style>

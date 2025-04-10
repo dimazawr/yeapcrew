@@ -1,0 +1,97 @@
+<script setup lang="ts">
+import { useDraggable, useBreakpoints, breakpointsTailwind } from '@vueuse/core'
+import { useTemplateRef } from 'vue'
+
+const { showModal, title, actionOnClose, isDraggableDisabled } = defineProps<{
+  showModal: boolean
+  title: string
+  type?: 'player' | 'folder'
+  actionOnClose?: () => void
+  isDraggableDisabled?: boolean
+}>()
+
+const breakpoints = useBreakpoints(breakpointsTailwind)
+
+const isDesktop = breakpoints.greater('lg')
+
+const dialogRef = useTemplateRef('dialog')
+
+const { style } = useDraggable(dialogRef, {
+  initialValue: { x: innerWidth / 4.2, y: 80 },
+  preventDefault: true,
+  disabled: Boolean(isDraggableDisabled),
+})
+
+const handleDialogClose = () => {
+  if (typeof actionOnClose === 'function') {
+    actionOnClose()
+  }
+  dialogRef.value?.close()
+}
+</script>
+
+<template>
+  <dialog
+    class="window"
+    ref="dialog"
+    :open="showModal"
+    :style="isDesktop && style"
+    style="position: fixed"
+    @click.prevent
+  >
+    <div class="title-bar">
+      <button aria-label="Close" class="close" @click="handleDialogClose"></button>
+      <h2 class="title">{{ title }}</h2>
+    </div>
+    <div class="window-pane">
+      <article class="grid" v-if="type !== 'player'">
+        <slot />
+      </article>
+      <div v-else class="container">
+        <slot />
+      </div>
+    </div>
+  </dialog>
+</template>
+
+<style scoped>
+dialog {
+  max-width: 90vw;
+  z-index: 1;
+  width: 40rem;
+  height: 30rem;
+  padding: 0;
+}
+dialog > div {
+  padding: 1em;
+}
+dialog[open] {
+  animation: zoom 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+article {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
+  gap: var(--space-2);
+}
+.container {
+  height: 42vh;
+  width: 100%;
+}
+
+@keyframes zoom {
+  from {
+    transform: scale(0.95);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+</style>

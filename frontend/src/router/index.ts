@@ -12,7 +12,7 @@ const router = createRouter({
     },
     {
       path: '/root/:folder',
-      component: () => import('../views/Folder.vue'),
+      component: () => import('../views/PersonalizedFolder.vue'),
     },
     {
       path: '/root/:folder/:subfolder',

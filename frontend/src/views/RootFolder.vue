@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import Dialog from '../components/Dialog.vue'
+import DialogComponent from '../components/DialogComponent.vue'
 import FolderBtnLink from '../components/FolderBtnLink.vue'
 import { useDataStore } from '@/stores/data'
 import { storeToRefs } from 'pinia'
@@ -13,7 +13,7 @@ const router = useRouter()
 </script>
 
 <template>
-  <Dialog
+  <DialogComponent
     :showModal="showModal"
     title="!!!OPENME!!!"
     :actionOnClose="() => router.back()"
@@ -26,5 +26,5 @@ const router = useRouter()
     >
       {{ folder.title }}
     </FolderBtnLink>
-  </Dialog>
+  </DialogComponent>
 </template>
