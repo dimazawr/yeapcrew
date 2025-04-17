@@ -4,20 +4,23 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/root',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/RootFolder.vue'),
-    },
-    {
-      path: '/root/:folder',
-      component: () => import('../views/PersonalizedFolder.vue'),
-    },
-    {
-      path: '/root/:folder/:subfolder',
-      component: () => import('../views/ContentFolder.vue'),
-    },
+      path: '/',
+      component: () => import('@/views/Home.vue'),
+      children: [
+        {
+          path: 'root',
+          component: () => import('@/views/RootFolder.vue'),
+          children: [
+            {
+              path: ':folderName',
+              name: 'subfolder',
+              components: { 
+                default: () => import('@/views/ContentFolder.vue')},
+            },
+          ],
+        },
+      ]
+    }
   ],
 })
 

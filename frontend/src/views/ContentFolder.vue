@@ -4,8 +4,9 @@ import DialogComponent from '../components/DialogComponent.vue'
 import { type ContentFolder } from '@/api/queries'
 import { useRoute, useRouter } from 'vue-router'
 import { useDataStore } from '@/stores/data'
-import FileIconBtn from '@/components/FileIconBtn.vue'
 import VideoPlayer from '@/components/VideoPlayer.vue'
+import IconBtn from '@/components/IconBtn.vue'
+import FileIcon from '@/components/icons/FileIcon.vue'
 
 const showModal = ref(true)
 const showPlayerModal = ref(false)
@@ -20,7 +21,7 @@ const handleDialogClose = () => {
 
 const { getContentFolderData } = useDataStore()
 
-folder.value = getContentFolderData(route.params.folder as string, route.params.subfolder as string)
+folder.value = getContentFolderData(route.params.folderName as string)
 </script>
 
 <template>
@@ -29,7 +30,7 @@ folder.value = getContentFolderData(route.params.folder as string, route.params.
       :title="folder?.title ?? 'Loading...'"
       :actionOnClose="handleDialogClose"
     >
-      <FileIconBtn
+      <IconBtn
         v-for="contentItem in folder?.content"
         :key="contentItem._key"
         :onClick="
@@ -39,8 +40,9 @@ folder.value = getContentFolderData(route.params.folder as string, route.params.
           }
         "
       >
+        <FileIcon />
         {{ contentItem.title }}
-      </FileIconBtn>
+      </IconBtn>
     </DialogComponent>
 
     <DialogComponent

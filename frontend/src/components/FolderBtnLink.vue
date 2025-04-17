@@ -2,7 +2,7 @@
 import FolderIcon from './icons/FolderIcon.vue'
 
 const { classname, href } = defineProps<{
-  href: string
+  href: Record<string, unknown> | string
   classname?: string
 }>()
 </script>

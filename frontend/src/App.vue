@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
-import FolderBtnLink from './components/FolderBtnLink.vue'
 
 import { ref, watchEffect } from 'vue'
 import { getMainLinks, getPersonolizedFolders, type MainScreenLinks } from '@/api/queries'
@@ -44,7 +43,6 @@ fetchData()
 <template>
   <main class="main">
     <section>
-      <FolderBtnLink href="/root" classname="folder--main"> !!!OPENME!!! </FolderBtnLink>
       <RouterView />
     </section>
   </main>
@@ -75,12 +73,11 @@ footer {
 }
 
 .links {
-  --s: 94px; /* control the size */
+  --s: 84px; /* control the size */
   display: grid;
   grid: auto-flow var(--s) / repeat(2, var(--s));
   place-items: center;
-  margin: calc(var(--s) / 2);
-  transform: rotate(45deg);
+  padding: 0;
 }
 
 .links li {
@@ -89,7 +86,6 @@ footer {
   align-items: center;
   list-style: none;
   cursor: pointer;
-  transform: rotate(-45deg);
 }
 
 .icon-links {

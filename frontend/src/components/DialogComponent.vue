@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useDraggable, useBreakpoints, breakpointsTailwind } from '@vueuse/core'
 import { useTemplateRef } from 'vue'
+import { useRoute } from 'vue-router';
 
 const { showModal, title, actionOnClose, isDraggableDisabled } = defineProps<{
   showModal: boolean
@@ -10,6 +11,13 @@ const { showModal, title, actionOnClose, isDraggableDisabled } = defineProps<{
   isDraggableDisabled?: boolean
 }>()
 
+const route = useRoute()
+
+const siblingOffset = route.fullPath.split('/').length
+
+const offsetY = siblingOffset * 40
+
+
 const breakpoints = useBreakpoints(breakpointsTailwind)
 
 const isDesktop = breakpoints.greater('lg')
@@ -17,7 +25,7 @@ const isDesktop = breakpoints.greater('lg')
 const dialogRef = useTemplateRef('dialog')
 
 const { style } = useDraggable(dialogRef, {
-  initialValue: { x: innerWidth / 4.2, y: 80 },
+  initialValue: { x: innerWidth / (4.2 + siblingOffset), y: offsetY },
   preventDefault: true,
   disabled: Boolean(isDraggableDisabled),
 })
@@ -34,6 +42,7 @@ const handleDialogClose = () => {
   <dialog
     class="window"
     ref="dialog"
+    :id="title"
     :open="showModal"
     :style="isDesktop && style"
     style="position: fixed"

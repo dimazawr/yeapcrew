@@ -1,11 +1,11 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
-import type { MainScreenLinks, PersonalizedFolder } from '@/api/queries'
+import type { ContentFolder, MainScreenLinks, PersonalizedFolder } from '@/api/queries'
 
 export const useDataStore = defineStore('data', () => {
   // store cached async data
   // create an object which would keep each folder to create stack of modals
-  const data = ref<PersonalizedFolder[] | []>([])
+  const data = ref<PersonalizedFolder | undefined>(undefined)
   const linksData = ref<
     | MainScreenLinks
     | {
@@ -18,43 +18,24 @@ export const useDataStore = defineStore('data', () => {
   })
 
   const setData = (newData: PersonalizedFolder[]) => {
-    const filteredData = newData.filter((folder) => {
-      // Filter subfolders to keep only those with content
-      if (folder.folders) {
-      folder.folders = folder.folders.filter((subfolder) => Boolean(subfolder.content))
-      // Keep this folder only if it has at least one subfolder with content
-      return folder.folders.length > 0
+    // assume that the first element is the root folder
+     const [ rootFolder ] = newData;
+      if (rootFolder.folders) {
+        rootFolder.folders = rootFolder.folders.filter((subfolder) => Boolean(subfolder.content))
       }
-      return false
-    })
-    data.value = filteredData
+      data.value = rootFolder
   }
 
   const setLinks = (newLinks: MainScreenLinks) => {
     linksData.value = newLinks
   }
 
-  const getPersonalizedFolderData = (slug: string) => {
-    const folder = data.value.find((folder) => folder.slug.current === slug)
-    if (folder) {
-      return folder
-    } else {
-      return null
-    }
-  }
 
-  const getContentFolderData = (parentFolderSlug: string, name: string) => {
-    const parentFolderName = parentFolderSlug
-      .split('-')
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(' ')
+  const getContentFolderData = (name: string) => {
 
-    const parentFolder = data.value.find(
-      (folder) => folder.title === parentFolderName && folder._type === 'personalizedFolder',
-    )
-    if (parentFolder) {
-      const contentFolder = parentFolder.folders.find((contentFolder) =>
-        new RegExp(`^${name}$`, 'i').test(contentFolder.title),
+    if (data.value) {
+      const contentFolder = data.value.folders.find((folder: ContentFolder) =>
+        new RegExp(`^${name}$`, 'i').test(folder.title),
       )
       return contentFolder ?? null
     } else {
@@ -62,5 +43,5 @@ export const useDataStore = defineStore('data', () => {
     }
   }
 
-  return { data, linksData, setData, setLinks, getPersonalizedFolderData, getContentFolderData }
+  return { data, linksData, setData, setLinks, getContentFolderData }
 })

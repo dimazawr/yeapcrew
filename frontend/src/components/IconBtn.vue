@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import FileIcon from './icons/FileIcon.vue'
 
 const { onClick } = defineProps<{
   onClick?: () => void
@@ -8,7 +7,6 @@ const { onClick } = defineProps<{
 
 <template>
   <button @click="onClick">
-    <FileIcon />
     <slot />
   </button>
 </template>
