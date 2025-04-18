@@ -4,6 +4,8 @@ import { RouterView } from 'vue-router'
 import { ref, watchEffect } from 'vue'
 import { getMainLinks, getPersonolizedFolders, type MainScreenLinks } from '@/api/queries'
 import { useDataStore } from '@/stores/data'
+import { useAsyncState } from '@vueuse/core'
+import ErrorDialog from './components/ErrorDialog.vue'
 
 const { setData } = useDataStore()
 
@@ -11,22 +13,24 @@ const linksData = ref<MainScreenLinks>({
   _type: 'mainScreenLinks',
   links: [],
 })
-const loading = ref(false)
 const error = ref<string | null>(null)
 
-async function fetchData() {
-  error.value = null
-  loading.value = true
-
-  try {
-    const data = await getPersonolizedFolders()
-    setData(data)
-  } catch (err) {
+const { state, isReady, isLoading } = useAsyncState(async () => await getPersonolizedFolders()
+, [], {
+  immediate: true,
+  onError(err) {
     error.value = err instanceof Error ? err.message : String(err)
-  } finally {
-    loading.value = false
+  },
+  onSuccess(data) {
+    setData(data)
   }
-}
+})
+
+watchEffect(() => {
+  if (isReady.value && !isLoading.value) {
+    setData(state.value)
+  }
+})
 
 watchEffect(async function fetchLinks() {
   try {
@@ -37,13 +41,26 @@ watchEffect(async function fetchLinks() {
   }
 })
 
-fetchData()
 </script>
 
 <template>
   <main class="main">
     <section>
       <RouterView />
+      <ErrorDialog
+        v-if="error"
+        :showModal="Boolean(error)"
+        :title="'Error'"
+        :actionOnClose="() => (error = null)"
+        :error="error"
+      >
+        <p class="error-message">
+          {{ error }}
+        </p>
+        <p class="error-message">
+          Please check your internet connection or try again later.
+        </p>
+    </ErrorDialog>
     </section>
   </main>
   <footer>

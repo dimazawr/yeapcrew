@@ -19,9 +19,19 @@ const handleDialogClose = () => {
   router.back()
 }
 
-const { getContentFolderData } = useDataStore()
+const rootStore = useDataStore()
 
-folder.value = getContentFolderData(route.params.folderName as string)
+const updateFolder = () => {
+  folder.value = rootStore.getContentFolderData(route.params.folderName as string)
+}
+
+rootStore.$subscribe((mutation) => {
+  if (mutation.type === "direct") {
+    updateFolder()
+  }
+})
+
+updateFolder()
 </script>
 
 <template>
