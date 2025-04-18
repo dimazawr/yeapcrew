@@ -19,20 +19,18 @@ export const useDataStore = defineStore('data', () => {
 
   const setData = (newData: PersonalizedFolder[]) => {
     // assume that the first element is the root folder
-     const [ rootFolder ] = newData;
-      if (rootFolder.folders) {
-        rootFolder.folders = rootFolder.folders.filter((subfolder) => Boolean(subfolder.content))
-      }
-      data.value = rootFolder
+    const [rootFolder] = newData
+    if (rootFolder.folders) {
+      rootFolder.folders = rootFolder.folders.filter((subfolder) => Boolean(subfolder.content))
+    }
+    data.value = rootFolder
   }
 
   const setLinks = (newLinks: MainScreenLinks) => {
     linksData.value = newLinks
   }
 
-
   const getContentFolderData = (name: string) => {
-
     if (data.value) {
       const contentFolder = data.value.folders.find((folder: ContentFolder) =>
         new RegExp(`^${name}$`, 'i').test(folder.title),

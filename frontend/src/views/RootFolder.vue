@@ -13,11 +13,7 @@ const router = useRouter()
 </script>
 
 <template>
-  <DialogComponent
-    :showModal="showModal"
-    title="!!!OPENME!!!"
-    :actionOnClose="() => router.back()"
-  >
+  <DialogComponent :showModal="showModal" title="!!!OPENME!!!" :actionOnClose="() => router.back()">
     <FolderBtnLink
       v-for="folder in rootFolder?.folders"
       :key="folder?.title"

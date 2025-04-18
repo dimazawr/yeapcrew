@@ -11,7 +11,7 @@ const { href } = defineProps<{
 }>()
 
 interface MediaThemeElement extends Element {
-  template: HTMLTemplateElement;
+  template: HTMLTemplateElement
 }
 
 const provider = href.includes('vimeo') ? 'vimeo' : 'youtube'
@@ -381,9 +381,9 @@ onMounted(() => {
       </media-controller>
     `
 
-  const mediaTheme = document.querySelector('#media-theme-reelplay') as MediaThemeElement;
+  const mediaTheme = document.querySelector('#media-theme-reelplay') as MediaThemeElement
   if (mediaTheme) {
-    mediaTheme.template = template;
+    mediaTheme.template = template
   }
 })
 </script>

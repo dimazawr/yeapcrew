@@ -25,37 +25,37 @@ folder.value = getContentFolderData(route.params.folderName as string)
 </script>
 
 <template>
-    <DialogComponent
-      :showModal="showModal"
-      :title="folder?.title ?? 'Loading...'"
-      :actionOnClose="handleDialogClose"
-    >
-      <IconBtn
-        v-for="contentItem in folder?.content"
-        :key="contentItem._key"
-        :onClick="
-          () => {
-            currentContent = contentItem
-            showPlayerModal = true
-          }
-        "
-      >
-        <FileIcon />
-        {{ contentItem.title }}
-      </IconBtn>
-    </DialogComponent>
-
-    <DialogComponent
-      :showModal="showPlayerModal"
-      :title="currentContent?.title ?? 'Error'"
-      type="player"
-      :actionOnClose="
+  <DialogComponent
+    :showModal="showModal"
+    :title="folder?.title ?? 'Loading...'"
+    :actionOnClose="handleDialogClose"
+  >
+    <IconBtn
+      v-for="contentItem in folder?.content"
+      :key="contentItem._key"
+      :onClick="
         () => {
-          currentContent = null
-          showPlayerModal = false
+          currentContent = contentItem
+          showPlayerModal = true
         }
       "
     >
-      <VideoPlayer :href="currentContent.link" v-if="currentContent" />
-    </DialogComponent>
+      <FileIcon />
+      {{ contentItem.title }}
+    </IconBtn>
+  </DialogComponent>
+
+  <DialogComponent
+    :showModal="showPlayerModal"
+    :title="currentContent?.title ?? 'Error'"
+    type="player"
+    :actionOnClose="
+      () => {
+        currentContent = null
+        showPlayerModal = false
+      }
+    "
+  >
+    <VideoPlayer :href="currentContent.link" v-if="currentContent" />
+  </DialogComponent>
 </template>

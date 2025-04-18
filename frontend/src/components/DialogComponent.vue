@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useDraggable, useBreakpoints, breakpointsTailwind } from '@vueuse/core'
 import { useTemplateRef } from 'vue'
-import { useRoute } from 'vue-router';
+import { useRoute } from 'vue-router'
 
 const { showModal, title, actionOnClose, isDraggableDisabled } = defineProps<{
   showModal: boolean
@@ -11,18 +11,17 @@ const { showModal, title, actionOnClose, isDraggableDisabled } = defineProps<{
   isDraggableDisabled?: boolean
 }>()
 
-const route = useRoute()
-
-const siblingOffset = route.fullPath.split('/').length
-
-const offsetY = siblingOffset * 40
-
-
 const breakpoints = useBreakpoints(breakpointsTailwind)
 
 const isDesktop = breakpoints.greater('lg')
 
 const dialogRef = useTemplateRef('dialog')
+
+const route = useRoute()
+
+const siblingOffset = route.fullPath.split('/').length
+
+const offsetY = siblingOffset * 40
 
 const { style } = useDraggable(dialogRef, {
   initialValue: { x: innerWidth / (4.2 + siblingOffset), y: offsetY },
@@ -65,14 +64,12 @@ const handleDialogClose = () => {
 
 <style scoped>
 dialog {
-  max-width: 90vw;
+  max-width: 100vw;
   z-index: 1;
   width: 40rem;
   height: 30rem;
   padding: 0;
-}
-dialog > div {
-  padding: 1em;
+  margin: 0;
 }
 dialog[open] {
   animation: zoom 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -102,5 +99,30 @@ article {
   to {
     opacity: 1;
   }
+}
+
+/* system.css rewrite */
+@media (max-width: 382px)  {
+  .title-bar {
+    padding: 0;
+    height: 8vh;
+    line-height: 1;
+  }
+}
+.title-bar {
+  height: initial;
+  padding: 0;
+}
+
+.title-bar .title {
+  font-size: 1rem;
+}
+
+@media (min-width: 640px) {
+  .title-bar .title {
+    font-size: 1.5rem;
+    line-height: 1.1;
+  }
+  
 }
 </style>
