@@ -50,12 +50,10 @@ watchEffect(async function fetchLinks() {
       <ErrorDialog
         v-if="error"
         :showModal="Boolean(error)"
-        :title="'Error'"
         :actionOnClose="() => (error = null)"
-        :error="error"
       >
         <p class="error-message">
-          {{ error }}
+          <strong> Error: </strong> {{ error }}
         </p>
         <p class="error-message">
           Please check your internet connection or try again later.
