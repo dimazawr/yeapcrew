@@ -6,7 +6,7 @@ import { useRoute } from 'vue-router'
 const { showModal, title, actionOnClose, isDraggableDisabled } = defineProps<{
   showModal: boolean
   title: string
-  type?: 'player' | 'folder'
+  type?: 'player' | 'folder' | 'description'
   actionOnClose?: () => void
   isDraggableDisabled?: boolean
 }>()
@@ -52,12 +52,13 @@ const handleDialogClose = () => {
       <h2 class="title">{{ title }}</h2>
     </div>
     <div class="window-pane">
-      <article class="grid" v-if="type !== 'player'">
+      <article class="grid" v-if="type === 'folder'">
         <slot />
       </article>
-      <div v-else class="container">
+      <div v-else-if="type === 'player'" class="container">
         <slot />
       </div>
+      <slot v-else />
     </div>
   </dialog>
 </template>
@@ -77,7 +78,7 @@ dialog[open] {
 article {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
-  gap: var(--space-2);
+  gap: 8px;
 }
 .container {
   height: 42vh;
@@ -102,6 +103,11 @@ article {
 }
 
 /* system.css rewrite */
+
+.window {
+  min-width: 280px;
+}
+
 @media (max-width: 382px)  {
   .title-bar {
     padding: 0;
@@ -123,6 +129,9 @@ article {
     font-size: 1.5rem;
     line-height: 1.1;
   }
-  
+}
+
+.window-pane > :last-child {
+  margin-bottom: 3rem;
 }
 </style>

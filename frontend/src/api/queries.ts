@@ -1,5 +1,5 @@
 import { client } from '../../sanity.config'
-import type { Slug } from '@sanity/types'
+import type { PortableTextBlock, Slug } from '@sanity/types'
 import { useMemoize } from '@vueuse/core'
 
 export interface ContentSource {
@@ -29,7 +29,7 @@ export interface PersonalizedFolder {
   _id: string
   title: string
   slug: Slug
-  excerpt?: string
+  description?: PortableTextBlock[]
   folders: ContentFolder[]
 }
 

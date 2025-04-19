@@ -15,6 +15,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@portabletext/vue": "^1.0.12",
     "@sanity/client": "^6.28.3",
     "@vueuse/core": "^13.0.0",
     "media-chrome": "^4.9.0",

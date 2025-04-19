@@ -39,6 +39,7 @@ updateFolder()
     :showModal="showModal"
     :title="folder?.title ?? 'Loading...'"
     :actionOnClose="handleDialogClose"
+    type="folder"
   >
     <IconBtn
       v-for="contentItem in folder?.content"

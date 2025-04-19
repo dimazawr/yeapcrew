@@ -5,15 +5,26 @@ import FolderBtnLink from '../components/FolderBtnLink.vue'
 import { useDataStore } from '@/stores/data'
 import { storeToRefs } from 'pinia'
 import { useRouter, RouterView } from 'vue-router'
+import { PortableText } from '@portabletext/vue'
+import FileIcon from '@/components/icons/FileIcon.vue'
+import IconBtn from '@/components/IconBtn.vue'
 
 const showModal = ref(true)
+const showDescription = ref(false)
 const store = useDataStore()
 const { data: rootFolder } = storeToRefs(store)
 const router = useRouter()
+
+const handleOpenDescription = () => {
+  showDescription.value = true
+}
+const handleCloseDescription = () => {
+  showDescription.value = false
+}
 </script>
 
 <template>
-  <DialogComponent :showModal="showModal" title="!!!OPENME!!!" :actionOnClose="() => router.back()">
+  <DialogComponent :showModal="showModal" title="!!!OPENME!!!" :actionOnClose="() => router.back()" type="folder">
     <FolderBtnLink
       v-for="folder in rootFolder?.folders"
       :key="folder?.title"
@@ -21,6 +32,23 @@ const router = useRouter()
     >
       {{ folder.title }}
     </FolderBtnLink>
+    <IconBtn v-if="rootFolder?.description"  :onClick="handleOpenDescription">
+      <FileIcon />
+      {{ rootFolder?.title }}.txt
+    </IconBtn>
   </DialogComponent>
   <RouterView />
+  <DialogComponent
+      :showModal="showDescription"
+      :title="rootFolder?.title ?? 'Description'"
+      :actionOnClose="handleCloseDescription"
+      type="description"
+      >
+
+      <PortableText
+        v-if="rootFolder?.description"
+        :value="rootFolder?.description"
+        />
+    
+    </DialogComponent>
 </template>

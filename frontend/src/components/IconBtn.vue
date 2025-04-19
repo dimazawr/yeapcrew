@@ -15,24 +15,14 @@ button {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-1);
-  padding: var(--space-1) var(--space-2);
+  gap: 4px;
+  padding: 4px 8px;
   border: none;
   border-radius: 0.2em;
   background: transparent;
   cursor: pointer;
+  font-size: 1rem;
+  font-family: Inconsolata, Menlo, Chicago, Geneva;
 }
 
-button:hover {
-  background: var(--color-primary-light);
-}
-
-button:active {
-  background: var(--color-primary-dark);
-}
-
-button:focus {
-  outline: none;
-  box-shadow: 0 0 0 0.2em var(--color-primary-light);
-}
 </style>
