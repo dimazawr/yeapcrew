@@ -59,7 +59,7 @@ watchEffect(async function fetchLinks() {
     <ul v-if="linksData" class="links">
       <li v-for="link in linksData.links" :key="link.title">
         <a :href="link.url" target="_blank" class="icon-links"
-          ><img :src="link.iconUrl" :alt="link.title" width="64" height="64" />
+          ><img :src="link.iconUrl" :alt="link.title" width="72" height="72" />
         </a>
       </li>
     </ul>
@@ -98,8 +98,6 @@ footer {
 }
 
 .icon-links {
-  background-color: #fff;
-  border-radius: 8px;
   padding: 0;
 }
 </style>
