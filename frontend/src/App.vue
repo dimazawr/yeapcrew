@@ -15,16 +15,19 @@ const linksData = ref<MainScreenLinks>({
 })
 const error = ref<string | null>(null)
 
-const { state, isReady, isLoading } = useAsyncState(async () => await getPersonolizedFolders()
-, [], {
-  immediate: true,
-  onError(err) {
-    error.value = err instanceof Error ? err.message : String(err)
+const { state, isReady, isLoading } = useAsyncState(
+  async () => await getPersonolizedFolders(),
+  [],
+  {
+    immediate: true,
+    onError(err) {
+      error.value = err instanceof Error ? err.message : String(err)
+    },
+    onSuccess(data) {
+      setData(data)
+    },
   },
-  onSuccess(data) {
-    setData(data)
-  }
-})
+)
 
 watchEffect(() => {
   if (isReady.value && !isLoading.value) {
@@ -40,25 +43,16 @@ watchEffect(async function fetchLinks() {
     error.value = err instanceof Error ? err.message : String(err)
   }
 })
-
 </script>
 
 <template>
   <main class="main">
     <section>
       <RouterView />
-      <ErrorDialog
-        v-if="error"
-        :showModal="Boolean(error)"
-        :actionOnClose="() => (error = null)"
-      >
-        <p class="error-message">
-          <strong> Error: </strong> {{ error }}
-        </p>
-        <p class="error-message">
-          Please check your internet connection or try again later.
-        </p>
-    </ErrorDialog>
+      <ErrorDialog v-if="error" :showModal="Boolean(error)" :actionOnClose="() => (error = null)">
+        <p class="error-message"><strong> Error: </strong> {{ error }}</p>
+        <p class="error-message">Please check your internet connection or try again later.</p>
+      </ErrorDialog>
     </section>
   </main>
   <footer>

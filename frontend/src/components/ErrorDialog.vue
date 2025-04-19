@@ -1,12 +1,10 @@
 <script lang="ts" setup>
-
 const { actionOnClose } = defineProps<{
   actionOnClose?: () => void
 }>()
-
 </script>
 <template>
-  <div class="standard-dialog scale-down" >
+  <div class="standard-dialog scale-down">
     <div class="dialog-text">
       <slot />
     </div>

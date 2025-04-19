@@ -26,7 +26,7 @@ const updateFolder = () => {
 }
 
 rootStore.$subscribe((mutation) => {
-  if (mutation.type === "direct") {
+  if (mutation.type === 'direct') {
     updateFolder()
   }
 })

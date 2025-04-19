@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import  HomeScreen from '@/views/HomeScreen.vue'
+import HomeScreen from '@/views/HomeScreen.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -24,10 +24,10 @@ const router = createRouter({
       ],
     },
     {
-      path: "/:pathMatch(.*)*",
+      path: '/:pathMatch(.*)*',
       name: 'not-found',
       component: () => import('@/views/NotFound.vue'),
-    }
+    },
   ],
 })
 

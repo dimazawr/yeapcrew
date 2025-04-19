@@ -24,7 +24,12 @@ const handleCloseDescription = () => {
 </script>
 
 <template>
-  <DialogComponent :showModal="showModal" title="!!!OPENME!!!" :actionOnClose="() => router.back()" type="folder">
+  <DialogComponent
+    :showModal="showModal"
+    title="!!!OPENME!!!"
+    :actionOnClose="() => router.back()"
+    type="folder"
+  >
     <FolderBtnLink
       v-for="folder in rootFolder?.folders"
       :key="folder?.title"
@@ -32,23 +37,18 @@ const handleCloseDescription = () => {
     >
       {{ folder.title }}
     </FolderBtnLink>
-    <IconBtn v-if="rootFolder?.description"  :onClick="handleOpenDescription">
+    <IconBtn v-if="rootFolder?.description" :onClick="handleOpenDescription">
       <FileIcon />
       {{ rootFolder?.title }}.txt
     </IconBtn>
   </DialogComponent>
   <RouterView />
   <DialogComponent
-      :showModal="showDescription"
-      :title="rootFolder?.title ?? 'Description'"
-      :actionOnClose="handleCloseDescription"
-      type="description"
-      >
-
-      <PortableText
-        v-if="rootFolder?.description"
-        :value="rootFolder?.description"
-        />
-    
-    </DialogComponent>
+    :showModal="showDescription"
+    :title="rootFolder?.title ?? 'Description'"
+    :actionOnClose="handleCloseDescription"
+    type="description"
+  >
+    <PortableText v-if="rootFolder?.description" :value="rootFolder?.description" />
+  </DialogComponent>
 </template>

@@ -108,7 +108,7 @@ article {
   min-width: 280px;
 }
 
-@media (max-width: 382px)  {
+@media (max-width: 382px) {
   .title-bar {
     padding: 0;
     height: 8vh;
