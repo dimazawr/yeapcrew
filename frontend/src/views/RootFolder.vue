@@ -39,13 +39,13 @@ const handleCloseDescription = () => {
     </FolderBtnLink>
     <IconBtn v-if="rootFolder?.description" :onClick="handleOpenDescription">
       <FileIcon />
-      {{ rootFolder?.title }}.txt
+      README.txt
     </IconBtn>
   </DialogComponent>
   <RouterView />
   <DialogComponent
     :showModal="showDescription"
-    :title="rootFolder?.title ?? 'Description'"
+    title="README"
     :actionOnClose="handleCloseDescription"
     type="description"
   >
