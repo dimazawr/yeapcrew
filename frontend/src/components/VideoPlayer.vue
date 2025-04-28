@@ -61,6 +61,7 @@ onMounted(() => {
         media-controller {
           display: block;
           overflow: hidden;
+          aspect-ratio: 16 / 9;
         }
 
         div[slot='top-chrome'],
