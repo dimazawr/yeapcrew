@@ -21,6 +21,12 @@ const handleOpenDescription = () => {
 const handleCloseDescription = () => {
   showDescription.value = false
 }
+
+import { useHead } from '@unhead/vue'
+
+useHead({
+  title: '!!!OPENME!!!',
+})
 </script>
 
 <template>

@@ -32,6 +32,12 @@ rootStore.$subscribe((mutation) => {
 })
 
 updateFolder()
+
+import { useHead } from '@unhead/vue'
+
+useHead({
+  title: `${folder.value?.title ?? 'Loading...'}`,
+})
 </script>
 
 <template>

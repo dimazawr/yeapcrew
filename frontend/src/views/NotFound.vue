@@ -1,6 +1,11 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
 import ErrorIcon from '@/components/icons/ErrorIcon.vue'
+import { useHead } from '@unhead/vue'
+
+useHead({
+  title: '404',
+})
 </script>
 
 <template>
