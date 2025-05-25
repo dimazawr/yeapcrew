@@ -21,7 +21,7 @@ button {
   border-radius: 0.2em;
   background: transparent;
   cursor: pointer;
-  font-size: 1rem;
+  font-size: .875rem;
   font-family: Inconsolata, Menlo, Chicago, Geneva;
 }
 </style>
