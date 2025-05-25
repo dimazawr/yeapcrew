@@ -7,13 +7,12 @@ import {structure} from './structure'
 import {schemaTypes} from './schemas'
 
 const projectId = process.env.SANITY_STUDIO_PROJECT_ID!
-const dataset = process.env.SANITY_STUDIO_DATASET!
+const testData = process.env.SANITY_STUDIO_TEST_DATASET!
+const productionData = process.env.SANITY_STUDIO_PRODUCTION_DATASET!
 
-export default defineConfig({
-  name: 'yeap-crew-sanity-studio',
-  title: 'Yeap Crew',
+const baseConfig = {
+  studioHost: 'yeapcrew',
   projectId,
-  dataset,
   plugins: [
     structureTool({
       structure
@@ -32,4 +31,18 @@ export default defineConfig({
   schema: {
     types: schemaTypes,
   },
-})
+}
+
+export default defineConfig([{
+  ...baseConfig,
+  name: 'yeap-crew-sanity-studio-test',
+  title: "Test site content",
+  dataset: testData,
+  basePath: "/test"
+}, {
+  ...baseConfig,
+  name: 'yeap-crew-sanity-studio-production',
+  title: "Production site content",
+  dataset: productionData,
+  basePath: "/prod"
+}])
