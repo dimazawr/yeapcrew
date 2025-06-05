@@ -33,7 +33,7 @@ useHead({
   <DialogComponent
     :showModal="showModal"
     title="!!!OPENME!!!"
-    :actionOnClose="() => router.back()"
+    @close="() => router.back()"
     type="folder"
   >
     <FolderBtnLink
@@ -43,7 +43,7 @@ useHead({
     >
       {{ folder.title }}
     </FolderBtnLink>
-    <IconBtn v-if="rootFolder?.description" :onClick="handleOpenDescription">
+    <IconBtn v-if="rootFolder?.description" @click="handleOpenDescription">
       <FileIcon />
       README.txt
     </IconBtn>
@@ -52,7 +52,7 @@ useHead({
   <DialogComponent
     :showModal="showDescription"
     title="README"
-    :actionOnClose="handleCloseDescription"
+    @close="handleCloseDescription"
     type="description"
   >
     <PortableText v-if="rootFolder?.description" :value="rootFolder?.description" />

@@ -50,7 +50,7 @@ useHead({
     <IconBtn
       v-for="contentItem in folder?.content"
       :key="contentItem._key"
-      :onClick="
+      @click="
         () => {
           currentContent = contentItem
           showPlayerModal = true
@@ -66,7 +66,7 @@ useHead({
     :showModal="showPlayerModal"
     :title="currentContent?.title ?? 'Error'"
     type="player"
-    :actionOnClose="
+    @close="
       () => {
         currentContent = null
         showPlayerModal = false

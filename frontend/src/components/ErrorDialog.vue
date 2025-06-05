@@ -1,7 +1,10 @@
 <script lang="ts" setup>
-const { actionOnClose } = defineProps<{
-  actionOnClose?: () => void
-}>()
+
+
+const emit = defineEmits<{
+  (event: "close"): void;
+}>();
+
 </script>
 <template>
   <div class="standard-dialog scale-down">
@@ -9,7 +12,7 @@ const { actionOnClose } = defineProps<{
       <slot />
     </div>
     <div>
-      <button class="btn" @click="actionOnClose">Close</button>
+      <button class="btn" @click="emit('close')">Close</button>
     </div>
   </div>
 </template>

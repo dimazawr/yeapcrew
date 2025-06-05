@@ -1,11 +1,14 @@
 <script setup lang="ts">
-const { onClick } = defineProps<{
-  onClick?: () => void
-}>()
+
+const emit = defineEmits<{
+  (event: "click"): void;
+}>();
+
+
 </script>
 
 <template>
-  <button @click="onClick">
+  <button @click="emit('click')" class="icon-btn">
     <slot />
   </button>
 </template>
