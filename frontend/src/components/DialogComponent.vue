@@ -3,13 +3,16 @@ import { useDraggable, useBreakpoints, breakpointsTailwind } from '@vueuse/core'
 import { useTemplateRef } from 'vue'
 import { useRoute } from 'vue-router'
 
-const { showModal, title, actionOnClose, isDraggableDisabled } = defineProps<{
+const { showModal, title, isDraggableDisabled } = defineProps<{
   showModal: boolean
   title: string
   type?: 'player' | 'folder' | 'description'
-  actionOnClose?: () => void
   isDraggableDisabled?: boolean
 }>()
+
+const emit = defineEmits<{
+  (event: "close"): void;
+}>();
 
 const breakpoints = useBreakpoints(breakpointsTailwind)
 
@@ -30,9 +33,7 @@ const { style } = useDraggable(dialogRef, {
 })
 
 const handleDialogClose = () => {
-  if (typeof actionOnClose === 'function') {
-    actionOnClose()
-  }
+  emit("close");
   dialogRef.value?.close()
 }
 </script>

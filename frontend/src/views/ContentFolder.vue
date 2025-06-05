@@ -44,7 +44,7 @@ useHead({
   <DialogComponent
     :showModal="showModal"
     :title="folder?.title ?? 'Loading...'"
-    :actionOnClose="handleDialogClose"
+    @close="handleDialogClose"
     type="folder"
   >
     <IconBtn
