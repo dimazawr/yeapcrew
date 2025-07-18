@@ -11,8 +11,8 @@ const { showModal, title, isDraggableDisabled } = defineProps<{
 }>()
 
 const emit = defineEmits<{
-  (event: "close"): void;
-}>();
+  (event: 'close'): void
+}>()
 
 const breakpoints = useBreakpoints(breakpointsTailwind)
 
@@ -33,7 +33,7 @@ const { style } = useDraggable(dialogRef, {
 })
 
 const handleDialogClose = () => {
-  emit("close");
+  emit('close')
   dialogRef.value?.close()
 }
 </script>

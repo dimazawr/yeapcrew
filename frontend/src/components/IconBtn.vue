@@ -1,10 +1,7 @@
 <script setup lang="ts">
-
 const emit = defineEmits<{
-  (event: "click"): void;
-}>();
-
-
+  (event: 'click'): void
+}>()
 </script>
 
 <template>
@@ -24,7 +21,7 @@ button {
   border-radius: 0.2em;
   background: transparent;
   cursor: pointer;
-  font-size: .875rem;
+  font-size: 0.875rem;
   font-family: Inconsolata, Menlo, Chicago, Geneva;
 }
 </style>

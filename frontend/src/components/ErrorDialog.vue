@@ -1,10 +1,7 @@
 <script lang="ts" setup>
-
-
 const emit = defineEmits<{
-  (event: "close"): void;
-}>();
-
+  (event: 'close'): void
+}>()
 </script>
 <template>
   <div class="standard-dialog scale-down">
