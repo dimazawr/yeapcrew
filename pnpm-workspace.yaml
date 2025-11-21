@@ -5,3 +5,11 @@ packages:
 ignoredBuiltDependencies:
   - esbuild
   - package-lock-only
+
+overrides:
+  '@eslint/plugin-kit@<0.3.4': '>=0.3.4'
+  glob@>=10.2.0 <10.5.0: '>=10.5.0'
+  glob@>=11.0.0 <11.1.0: '>=11.1.0'
+  js-yaml@<3.14.2: '>=3.14.2'
+  js-yaml@>=4.0.0 <4.1.1: '>=4.1.1'
+  tar-fs@>=2.0.0 <2.1.4: '>=2.1.4'
