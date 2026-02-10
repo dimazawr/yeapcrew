@@ -73,6 +73,6 @@ useHead({
       }
     "
   >
-    <VideoPlayer :href="currentContent.link" v-if="currentContent" />
+    <VideoPlayer :href="currentContent.link ?? ''" v-if="currentContent" />
   </DialogComponent>
 </template>

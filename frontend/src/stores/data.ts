@@ -20,7 +20,7 @@ export const useDataStore = defineStore('data', () => {
   const setData = (newData: PersonalizedFolder[]) => {
     // assume that the first element is the root folder
     const [rootFolder] = newData
-    if (rootFolder.folders) {
+    if (rootFolder?.folders) {
       rootFolder.folders = rootFolder.folders.filter((subfolder) => Boolean(subfolder.content))
     }
     data.value = rootFolder
