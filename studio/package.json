@@ -15,20 +15,20 @@
     "sanity"
   ],
   "dependencies": {
-    "@sanity/icons": "^3.7.4",
-    "@sanity/vision": "^5.17.1",
-    "react": "^19.2.4",
-    "react-dom": "^19.2.4",
-    "react-is": "^19.2.4",
-    "sanity": "^5.17.1",
-    "styled-components": "^6.3.11"
+    "@sanity/icons": "^5.2.1",
+    "@sanity/vision": "^6.8.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "react-is": "^19.2.8",
+    "sanity": "^6.8.0",
+    "styled-components": "^6.4.4"
   },
   "devDependencies": {
     "@sanity/eslint-config-studio": "^6.0.0",
     "@types/node": "^24",
-    "@types/react": "^19.2.4",
-    "eslint": "^9.19.0",
-    "prettier": "^3.8.1",
+    "@types/react": "^19.2.18",
+    "eslint": "^10.8.0",
+    "prettier": "^3.9.6",
     "typescript": "^5.8.3"
   },
   "prettier": {
