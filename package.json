@@ -18,8 +18,8 @@
     "singleQuote": true
   },
   "devDependencies": {
-    "concurrently": "^10.0.4",
-    "prettier": "3.9.6",
-    "prettier-plugin-packagejson": "3.0.2"
+    "concurrently": "^10.0.7",
+    "prettier": "3.10.1",
+    "prettier-plugin-packagejson": "3.1.0"
   }
 }
